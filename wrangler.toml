@@ -1,0 +1,23 @@
+name = "workers-rs-issue-414"
+main = "build/worker/shim.mjs"
+compatibility_date = "2023-03-22"
+logpush = true
+
+[build]
+command = "cargo install -q worker-build && worker-build --release"
+
+# KV Namespace binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv
+[[kv_namespaces]]
+binding = "URLS"
+id = "fde811d23bd544a8ad15f3b6a2166d8c"
+
+[[queues.producers]]
+queue = "414-a"
+binding = "QUEUE_A"
+
+[[queues.producers]]
+queue = "414-b"
+binding = "QUEUE_B"
+
+[[queues.consumers]]
+queue = "414-a"
